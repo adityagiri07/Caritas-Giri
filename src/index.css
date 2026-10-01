@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+#root {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 .glass-panel {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%);
   backdrop-filter: blur(28px);

@@ -36,10 +36,10 @@ export default function Portfolio({
   }
 
   return (
-    <section className="py-24 relative bg-[#04060c] border-t border-white/5 scroll-mt-32" id="work">
+    <section className="py-24 relative bg-[#04060c] border-t border-white/5 scroll-mt-32 overflow-x-clip" id="work">
       <div className="absolute -top-px inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_#67e8f9] pointer-events-none z-20" />
       <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-[#05070f] via-blue-950/20 to-transparent pointer-events-none -z-10" />
-      <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[700px] h-48 bg-gradient-to-r from-cyan-500/10 via-brand-royal/20 to-blue-600/15 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[min(700px,100%)] h-48 bg-gradient-to-r from-cyan-500/10 via-brand-royal/20 to-blue-600/15 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6">
         <Reveal className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">

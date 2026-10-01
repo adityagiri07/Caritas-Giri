@@ -1,25 +1,62 @@
 import { useState } from 'react'
 import Reveal from './Reveal'
 
+const CONTACT_EMAIL = 'adityagiri4417@gmail.com'
+
 export default function Contact() {
   const [status, setStatus] = useState('idle')
+  const [error, setError] = useState('')
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault()
+    const form = event.currentTarget
+    const data = new FormData(form)
+    if (String(data.get('_honey') || '').trim()) return
+
     setStatus('sending')
-    window.setTimeout(() => {
+    setError('')
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: data.get('name'),
+          email: data.get('email'),
+          discipline: data.get('discipline'),
+          message: data.get('brief'),
+          _subject: `Portfolio inquiry from ${data.get('name')}`,
+          _template: 'table',
+          _captcha: 'false',
+          _replyto: data.get('email'),
+        }),
+      })
+      const result = await response.json().catch(() => ({}))
+      if (!response.ok || result.success === false || result.success === 'false') {
+        const message = result.message || 'The inquiry could not be sent. Please try again.'
+        if (/activation/i.test(message)) {
+          throw new Error(
+            `Almost ready. Open ${CONTACT_EMAIL}, find the FormSubmit email, and click Activate Form once. After that, inquiries will arrive in that inbox.`,
+          )
+        }
+        throw new Error(message)
+      }
       setStatus('sent')
-      window.setTimeout(() => {
-        event.target.reset()
-        setStatus('idle')
-      }, 3500)
-    }, 1200)
+      form.reset()
+      window.setTimeout(() => setStatus('idle'), 4000)
+    } catch (err) {
+      setStatus('error')
+      setError(err instanceof Error ? err.message : 'The inquiry could not be sent. Please try again.')
+    }
   }
 
   return (
-    <section className="py-24 relative bg-gradient-to-b from-[#060a14] to-[#030408] border-t border-white/5" id="contact">
+    <section className="py-24 relative bg-gradient-to-b from-[#060a14] to-[#030408] border-t border-white/5 overflow-x-clip" id="contact">
       <div className="absolute -top-px inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_#67e8f9] pointer-events-none z-20" />
-      <div className="absolute -top-28 right-1/3 w-[600px] h-48 bg-gradient-to-tr from-cyan-400/20 via-brand-royal/25 to-blue-500/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute -top-28 right-1/3 w-[min(600px,80%)] h-48 bg-gradient-to-tr from-cyan-400/20 via-brand-royal/25 to-blue-500/20 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-4xl mx-auto px-6">
         <Reveal>
@@ -36,6 +73,7 @@ export default function Contact() {
             </div>
 
             <form className="space-y-5 relative" onSubmit={onSubmit}>
+              <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-xs font-mono uppercase text-slate-300 mb-2">Your Name</label>
@@ -83,14 +121,14 @@ export default function Contact() {
                 />
               </div>
               <button
-                className={`btn-shimmer relative w-full py-4 rounded-xl bg-gradient-to-r from-brand-royal via-blue-500 to-cyan-400 hover:from-blue-600 hover:via-brand-royal hover:to-cyan-300 active:scale-[0.99] text-white font-semibold text-sm tracking-wider uppercase shadow-glow hover:shadow-neon-blue transition-all duration-300 flex items-center justify-center gap-2 ${
+                className={`btn-shimmer relative w-full py-4 rounded-xl bg-gradient-to-r from-brand-royal via-blue-500 to-cyan-400 hover:from-blue-600 hover:via-brand-royal hover:to-cyan-300 active:scale-[0.99] text-white font-semibold text-sm tracking-wider uppercase shadow-glow hover:shadow-neon-blue transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed ${
                   status === 'sent' ? 'from-emerald-600 via-emerald-600 to-emerald-500' : ''
                 }`}
                 type="submit"
-                disabled={status !== 'idle'}
+                disabled={status === 'sending'}
               >
                 <span>
-                  {status === 'sending' ? 'Sending...' : status === 'sent' ? 'Inquiry Sent!' : 'Send Inquiry'}
+                  {status === 'sending' ? 'Sending...' : status === 'sent' ? 'Inquiry Sent!' : status === 'error' ? 'Try Again' : 'Send Inquiry'}
                 </span>
                 {status === 'sending' ? (
                   <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -104,6 +142,12 @@ export default function Contact() {
                   </svg>
                 ) : null}
               </button>
+              {status === 'error' && error ? (
+                <p className="text-sm text-rose-300 text-center leading-relaxed">{error}</p>
+              ) : null}
+              {status === 'sent' ? (
+                <p className="text-sm text-emerald-300 text-center">Your inquiry is on its way. I’ll reply by email.</p>
+              ) : null}
             </form>
           </div>
         </Reveal>

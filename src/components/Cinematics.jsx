@@ -50,9 +50,9 @@ export default function Cinematics() {
   return (
     <section className="py-24 relative overflow-hidden bg-gradient-to-b from-[#04060c] via-[#081533] to-[#04060c]" id="cinematics">
       <div className="absolute -top-px inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent shadow-[0_0_12px_#60a5fa] pointer-events-none z-20" />
-      <div className="absolute -top-20 left-1/4 w-[600px] h-40 bg-cyan-400/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute -top-20 left-1/4 w-[min(600px,70%)] h-40 bg-cyan-400/20 rounded-full blur-[120px] pointer-events-none" />
       <div
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] rounded-full blur-[140px] pointer-events-none transition-all duration-1000 ${
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(700px,100%)] h-[450px] rounded-full blur-[140px] pointer-events-none transition-all duration-1000 ${
           playing ? 'scale-125 bg-cyan-500/25' : 'bg-blue-600/15'
         }`}
       />

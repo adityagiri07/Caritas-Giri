@@ -54,10 +54,10 @@ export default function Hero({ scrollY, onFilterChange, activeFilter, filters = 
     >
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-0 left-0 right-0 h-[80%] bg-gradient-to-b from-[#2565c8] via-[#114ca8] to-[#04060d] opacity-90" />
-        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[900px] h-[550px] bg-[#3a7bf0]/35 rounded-full blur-[120px] aurora-pulse" />
-        <div className="absolute top-[20%] left-[-10%] w-[550px] h-[550px] bg-[#1d57ba]/40 rounded-full blur-[100px]" />
+        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[min(900px,140%)] max-w-full h-[550px] bg-[#3a7bf0]/35 rounded-full blur-[120px] aurora-pulse" />
+        <div className="absolute top-[20%] left-[-10%] w-[min(550px,80%)] h-[550px] bg-[#1d57ba]/40 rounded-full blur-[100px]" />
         <svg
-          className="absolute top-10 right-[-60px] md:right-4 w-72 md:w-96 h-80 opacity-70 fluid-ribbon pointer-events-none transform transition-transform duration-700 hover:scale-105"
+          className="absolute top-10 -right-6 md:right-4 w-56 sm:w-72 md:w-96 h-64 sm:h-80 opacity-70 fluid-ribbon pointer-events-none transform transition-transform duration-700 hover:scale-105"
           fill="none"
           viewBox="0 0 400 400"
           style={{ transform: parallaxActive ? `translate3d(0, ${scrollY * 0.22}px, 0)` : undefined }}
@@ -72,7 +72,7 @@ export default function Hero({ scrollY, onFilterChange, activeFilter, filters = 
           </defs>
         </svg>
         <svg
-          className="absolute bottom-16 -left-20 w-80 md:w-[420px] h-96 opacity-60 fluid-ribbon pointer-events-none transform transition-transform duration-700"
+          className="absolute bottom-16 -left-16 sm:-left-20 w-64 sm:w-80 md:w-[420px] h-72 sm:h-96 opacity-60 fluid-ribbon pointer-events-none transform transition-transform duration-700"
           fill="none"
           viewBox="0 0 400 400"
           style={{ transform: parallaxActive ? `translate3d(0, ${scrollY * -0.15}px, 0)` : undefined }}

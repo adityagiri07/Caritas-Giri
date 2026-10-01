@@ -54,9 +54,9 @@ export default function About() {
   }, [])
 
   return (
-    <section className="py-24 relative bg-[#04060c]" id="about" ref={sectionRef}>
+    <section className="py-24 relative bg-[#04060c] overflow-x-clip" id="about" ref={sectionRef}>
       <div className="absolute -top-px inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_#67e8f9] pointer-events-none z-20" />
-      <div className="absolute -top-32 right-1/4 w-[650px] h-52 bg-gradient-to-tr from-brand-royal/20 via-blue-600/15 to-cyan-400/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute -top-32 right-1/4 w-[min(650px,80%)] h-52 bg-gradient-to-tr from-brand-royal/20 via-blue-600/15 to-cyan-400/20 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">

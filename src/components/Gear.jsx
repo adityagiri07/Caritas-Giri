@@ -31,7 +31,7 @@ export default function Gear() {
   return (
     <section className="py-20 relative bg-[#060a14] border-t border-white/5 overflow-hidden" id="gear">
       <div className="absolute -top-px inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent shadow-[0_0_12px_#60a5fa] pointer-events-none z-20" />
-      <div className="absolute -top-24 left-1/3 w-[550px] h-44 bg-gradient-to-r from-blue-500/20 via-cyan-400/20 to-brand-royal/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute -top-24 left-1/3 w-[min(550px,70%)] h-44 bg-gradient-to-r from-blue-500/20 via-cyan-400/20 to-brand-royal/20 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute -right-24 -bottom-24 w-96 h-96 pointer-events-none opacity-20">
         <svg className="w-full h-full iris-rotating-ring" fill="none" stroke="#38bdf8" strokeWidth="1.2" viewBox="0 0 200 200">
           <circle cx="100" cy="100" r="90" strokeDasharray="8 6" />
